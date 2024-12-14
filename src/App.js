@@ -1,22 +1,18 @@
-import React from "react";
-// import UserList from "./components/userList";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
 import Homepage from "./pages/homepage";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
+import User from "./pages/user";
 
 function App() {
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <UserList />
-    //   </header>
-    // </div>
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );

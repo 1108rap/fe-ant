@@ -2,6 +2,7 @@ import { Button, Table } from "antd";
 import DashLayout from "../../layout/DashLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import TableUsers from "../../constraints/tableUsers";
 
 const User = () => {
   const [dataUser, setDataUser] = useState([]);
@@ -20,6 +21,10 @@ const User = () => {
   return (
     <DashLayout>
       <Button type="primary">Add User</Button>
+      <Table
+        columns={TableUsers}
+        dataSource={dataUser.map((data) => ({ ...data, key: data.id }))}
+      />
     </DashLayout>
   );
 };

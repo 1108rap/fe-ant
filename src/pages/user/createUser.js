@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button, Form, Input, message, Select } from "antd";
 import DashLayout from "../../layout/DashLayout";
-import FormItem from "antd/es/form/FormItem";
-
+import { useNavigate } from "react-router-dom";
 const CreateUsers = () => {
   const [form] = Form.useForm();
   const [employee, setEmployee] = useState([]);
   const [loading, setLoading] = useState([]);
+  const navigate = useNavigate();
 
   const fetchEmployees = async () => {
     try {
@@ -76,6 +76,9 @@ const CreateUsers = () => {
           <Input.Password placeholder="Enter password" />
         </Form.Item>
         <Form.Item>
+          <Button type="primary" danger onClick={() => navigate(-1)}>
+            Discard
+          </Button>
           <Button type="primary" htmlType="submit">
             Save
           </Button>

@@ -1,31 +1,26 @@
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { Button, Popconfirm, Space, Tooltip } from "antd";
 import { format } from "date-fns";
-import { Space, Button, Tooltip, Popconfirm } from "antd";
-import { EyeOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const formatDate = (timestamp) => {
   return format(new Date(timestamp), "dd-MM-yyyy HH:mm");
 };
 
-const TableUsers = [
+const TableMenus = [
   {
-    title: "Name",
+    title: "Menu",
     dataIndex: "name",
-    key: "name",
+    key: "menu",
   },
   {
-    title: "Username",
-    dataIndex: "username",
-    key: "username",
+    title: "Type",
+    dataIndex: "type",
+    key: "type",
   },
   {
-    title: "Status",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Active",
-    dataIndex: "active_at",
-    key: "active",
+    title: "Created at",
+    dataIndex: "created_at",
+    key: "created",
     render: (text) => (text ? formatDate(text) : "-"),
   },
   {
@@ -38,7 +33,7 @@ const TableUsers = [
         </Tooltip>
         <Tooltip title="Delete">
           <Popconfirm
-            title="Are you sure to delete this user?"
+            title="Are you sure to delete this Menu ?"
             onConfirm={""}
             okText="Yes"
             cancelText="Cancel"
@@ -48,7 +43,6 @@ const TableUsers = [
               danger
               icon={<DeleteOutlined />}
               size="small"
-              alt="Delete"
             />
           </Popconfirm>
         </Tooltip>
@@ -56,4 +50,5 @@ const TableUsers = [
     ),
   },
 ];
-export default TableUsers;
+
+export default TableMenus;

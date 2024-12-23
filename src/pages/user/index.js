@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Space, Table } from "antd";
 import DashLayout from "../../layout/DashLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -22,18 +22,22 @@ const User = () => {
   }, []);
 
   return (
-    <DashLayout>
-      <Button type="primary" danger onClick={() => navigate(-1)}>
-        Back
-      </Button>
-      <Button type="primary" onClick={() => navigate("/user/formuser")}>
-        Add User
-      </Button>
+    // <DashLayout>
+    <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+      <Space size="small">
+        <Button type="primary" danger onClick={() => navigate(-1)}>
+          Back
+        </Button>
+        <Button type="primary" onClick={() => navigate("/user/formuser")}>
+          Add User
+        </Button>
+      </Space>
       <Table
         columns={TableUsers}
         dataSource={dataUser.map((data) => ({ ...data, key: data.id }))}
       />
-    </DashLayout>
+    </Space>
+    // </DashLayout>
   );
 };
 

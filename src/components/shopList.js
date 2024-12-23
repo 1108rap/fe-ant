@@ -4,10 +4,10 @@ import {
   InfoCircleOutlined,
   EllipsisOutlined,
 } from "@ant-design/icons";
-import menuRender from "../helpers/menuRender";
+import menuRender from "../utils/menuRender";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import handleMenuClick from "../helpers/handleMenu";
+import handleMenuClick from "../utils/handleMenu";
 import axios from "axios";
 
 const { Content, Sider } = Layout;
@@ -24,7 +24,7 @@ const ShopList = ({ children }) => {
       try {
         // const response = await axios.get("http://127.0.0.1:5000/api/menu");
         const response = await axios.all([
-          axios.get("http://127.0.0.1:5000/api/menu"),
+          axios.get("http://127.0.0.1:5000/api/menusl"),
           axios.get("https://fakestoreapi.com/products/"),
         ]);
         setMenuItems(response[0].data);

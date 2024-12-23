@@ -1,15 +1,15 @@
 // Import Library
+import React from "react";
 import { Button, Layout, Menu, theme, Space, Avatar } from "antd";
 import { useEffect, useState } from "react";
-import menuRender from "../helpers/menuRender";
-import handleMenuClick from "../helpers/handleMenu";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import axios from "axios";
+import SidebarDash from "../components/sidebarDash";
 
 // initialization Library
 const { Header, Content, Footer, Sider } = Layout;
@@ -17,35 +17,14 @@ const { Header, Content, Footer, Sider } = Layout;
 // Main Program
 const DashLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate();
-  const [dashItems, setDashItems] = useState([]);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:5000/api/dashMenu");
-        setDashItems(response.data);
-      } catch (err) {
-        console.error("Error fetching menus:", err);
-      }
-    };
-    fetchMenu();
-  }, []);
-  const items = menuRender(dashItems);
 
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <Menu
-          mode="inline"
-          onClick={handleMenuClick(navigate)}
-          style={{ height: "100%", padding: "0 16px" }}
-          items={items}
-        />
-        {/* {menuRender(dashItems)}
-        </Menu> */}
+        <SidebarDash />
       </Sider>
       <Layout>
         <Header
@@ -92,4 +71,4 @@ const DashLayout = ({ children }) => {
   );
 };
 
-export default DashLayout;
+export default React.memo(DashLayout);

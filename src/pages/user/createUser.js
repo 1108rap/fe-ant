@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Button, Form, Input, message, Select } from "antd";
-import DashLayout from "../../layout/DashLayout";
+import { Button, Form, Input, message, Select, Space } from "antd";
 import { useNavigate } from "react-router-dom";
+
 const CreateUsers = () => {
   const [form] = Form.useForm();
   const [employee, setEmployee] = useState([]);
@@ -11,9 +11,7 @@ const CreateUsers = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get(
-        "http://127.0.0.1:5000/employeecreateusers"
-      );
+      const response = await axios.get("http://127.0.0.1:5000/api/refuseremp");
       setEmployee(response.data);
     } catch (err) {
       console.error(err);
@@ -40,51 +38,51 @@ const CreateUsers = () => {
     }
   };
   return (
-    <DashLayout>
-      <Form
-        form={form}
-        name="formUsers"
-        layout="vertical"
-        onFinish={onFinish}
-        style={{ maxWidth: 400, margin: "0 auto" }}
+    <Form
+      form={form}
+      name="formUsers"
+      layout="vertical"
+      onFinish={onFinish}
+      style={{ maxWidth: 400, margin: "0 auto" }}
+    >
+      <Form.Item
+        label="Employee"
+        name="employee_id"
+        rules={[{ required: true, message: "Please select an employee" }]}
       >
-        <Form.Item
-          label="Employee"
-          name="employee_id"
-          rules={[{ required: true, message: "Please select an employee" }]}
-        >
-          <Select placeholder="Select an employee">
-            {employee.map((employee) => (
-              <Select.Option key={employee.id} value={employee.id}>
-                {employee.name}
-              </Select.Option>
-            ))}
-          </Select>
-        </Form.Item>
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: "Please select a username" }]}
-        >
-          <Input placeholder="Enter username" />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: "Please select a password" }]}
-        >
-          <Input.Password placeholder="Enter password" />
-        </Form.Item>
-        <Form.Item>
+        <Select placeholder="Select an employee">
+          {employee.map((employee) => (
+            <Select.Option key={employee.id} value={employee.id}>
+              {employee.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: "Please select a username" }]}
+      >
+        <Input placeholder="Enter username" />
+      </Form.Item>
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: "Please select a password" }]}
+      >
+        <Input.Password placeholder="Enter password" />
+      </Form.Item>
+      <Form.Item style={{ display: "flex", justifyContent: "center" }}>
+        <Space size="small">
           <Button type="primary" danger onClick={() => navigate(-1)}>
             Discard
           </Button>
           <Button type="primary" htmlType="submit">
             Save
           </Button>
-        </Form.Item>
-      </Form>
-    </DashLayout>
+        </Space>
+      </Form.Item>
+    </Form>
   );
 };
 

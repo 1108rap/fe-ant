@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import handleMenuClick from "../helpers/handleMenu";
-import menuRender from "../helpers/menuRender";
+import handleMenuClick from "../utils/handleMenu";
+import menuRender from "../utils/menuRender";
 import { Menu, Layout, Flex } from "antd";
-import Banner from "../components/banner";
 
 //initialization Library
 const { Header, Content, Footer, Sider } = Layout;
@@ -30,7 +29,13 @@ const HomeLayout = ({ children }) => {
 
   return (
     <Layout>
-      <Header style={{ display: "flex", alignItems: "center", padding: 0 }}>
+      <Header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          padding: 0,
+        }}
+      >
         <Menu
           mode="horizontal"
           onClick={handleMenuClick(navigate)}

@@ -1,14 +1,12 @@
 // Import Library
 import React from "react";
-import { Button, Layout, Menu, theme, Space, Avatar } from "antd";
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Button, Layout, theme, Space, Avatar } from "antd";
+import { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import axios from "axios";
 import SidebarDash from "../components/sidebarDash";
 
 // initialization Library

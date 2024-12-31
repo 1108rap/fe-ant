@@ -13,6 +13,8 @@ import CreateUser from "./pages/user/createUser";
 import Employee from "./pages/employee";
 import Menus from "./pages/menu";
 import createMenu from "./pages/menu/createMenu";
+import Product from "./pages/product";
+import Role from "./pages/role";
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           element={withLayout(DashLayout, createMenu)}
         />
         <Route path="/menu" element={withLayout(DashLayout, Menus)} />
+        <Route path="/product" element={withLayout(DashLayout, Product)} />
+        <Route path="/role" element={withLayout(DashLayout, Role)} />
       </Routes>
     </Router>
   );

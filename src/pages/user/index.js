@@ -1,4 +1,4 @@
-import { Button, Space, Table } from "antd";
+import { Button, message, Space, Table } from "antd";
 import DashLayout from "../../layout/DashLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -9,17 +9,29 @@ const User = () => {
   const [dataUser, setDataUser] = useState([]);
   const navigate = useNavigate();
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:5000/api/users");
+      setDataUser(response.data);
+    } catch (err) {
+      console.error("Error fetching data users:", err);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:5000/api/users");
-        setDataUser(response.data);
-      } catch (err) {
-        console.error("Error fetching data users:", err);
-      }
-    };
     fetchData();
   }, []);
+
+  const softDeleteUser = async (id) => {
+    try {
+      await axios.put(`http://127.0.0.1:5000/api/users/${id}/delete`);
+      message.success("User deleted successfully");
+      fetchData();
+    } catch (err) {
+      console.error(err);
+      message.error("Failed to delete user");
+    }
+  };
 
   return (
     // <DashLayout>
@@ -33,7 +45,7 @@ const User = () => {
         </Button>
       </Space>
       <Table
-        columns={TableUsers}
+        columns={TableUsers(softDeleteUser)}
         dataSource={dataUser.map((data) => ({ ...data, key: data.id }))}
       />
     </Space>

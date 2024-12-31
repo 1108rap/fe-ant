@@ -8,14 +8,22 @@ const formatDate = (timestamp) => {
 
 const TableEmployees = [
   {
+    title: "No",
+    key: "index",
+    render: (_, __, index) => index + 1,
+  },
+  {
     title: "Name",
     dataIndex: "name",
     key: "name",
   },
   {
     title: "Profession",
-    dataIndex: "profession_id",
+    dataIndex: "profession",
     key: "profession",
+    render: (text) => (
+      <span style={{ textTransform: "capitalize" }}>{text}</span>
+    ),
   },
   {
     title: "Address",

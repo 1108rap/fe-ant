@@ -22,13 +22,14 @@ const ShopList = ({ children }) => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        // const response = await axios.get("http://127.0.0.1:5000/api/menu");
-        const response = await axios.all([
-          axios.get("http://127.0.0.1:5000/api/menusl"),
-          axios.get("https://fakestoreapi.com/products/"),
-        ]);
-        setMenuItems(response[0].data);
-        setProductData(response[1].data);
+        const response = await axios.get("http://127.0.0.1:5000/api/menusl");
+        // const response = await axios.all([
+        //   axios.get("http://127.0.0.1:5000/api/menusl"),
+        //   axios.get("https://fakestoreapi.com/products/"),
+        // ]);
+        // setMenuItems(response[0].data);
+        setMenuItems(response.data);
+        // setProductData(response[1].data);
       } catch (error) {
         console.error("Error fetching menus:", error);
       }
@@ -68,30 +69,31 @@ const ShopList = ({ children }) => {
       <Content style={{ background: colorBgContainer, padding: 16 }}>
         {children}
         <Flex mode="horizontal" gap="middle" wrap="wrap">
-          {productData.map((product) => (
-            <Card
-              key={product.id}
-              style={{ width: 300 }}
-              cover={
-                <img
-                  style={{
-                    width: 300,
-                    aspectRatio: 4 / 3,
-                    objectFit: "contain",
-                  }}
-                  src={product.image}
-                />
-              }
-              actions={[
-                <ShoppingCartOutlined key="Buy" />,
-                <InfoCircleOutlined key="Info" />,
-                <EllipsisOutlined key="More" />,
-              ]}
-              hoverable={true}
-            >
-              <Meta title={product.title} description={product.description} />
-            </Card>
-          ))}
+          {/* {productData.map((product) => ( */}
+          <Card
+            // key={product.id}
+            style={{ width: 300 }}
+            // cover={
+            //   <img
+            //     style={{
+            //       width: 300,
+            //       aspectRatio: 4 / 3,
+            //       objectFit: "contain",
+            //     }}
+            //     // src={product.image}
+            //   />
+            // }
+            actions={[
+              <ShoppingCartOutlined key="Buy" />,
+              <InfoCircleOutlined key="Info" />,
+              <EllipsisOutlined key="More" />,
+            ]}
+            hoverable={true}
+          >
+            {/* <Meta title={product.title} description={product.description} /> */}
+            <Meta title="Baju Pendek" description="baju pendek" />
+          </Card>
+          {/* ))} */}
         </Flex>
       </Content>
     </Layout>

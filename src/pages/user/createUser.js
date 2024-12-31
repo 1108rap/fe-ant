@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const CreateUsers = () => {
   const [form] = Form.useForm();
   const [employee, setEmployee] = useState([]);
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetchEmployees = async () => {
@@ -26,7 +26,8 @@ const CreateUsers = () => {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/adduser", values);
+      // await axios.post("http://localhost:5000/adduser", values);
+      await axios.post("http://localhost:5000/api/createuser", values);
       message.success("User added succesfully!");
       form.resetFields();
       fetchEmployees();
@@ -77,7 +78,7 @@ const CreateUsers = () => {
           <Button type="primary" danger onClick={() => navigate(-1)}>
             Discard
           </Button>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             Save
           </Button>
         </Space>

@@ -6,7 +6,12 @@ const formatDate = (timestamp) => {
   return format(new Date(timestamp), "dd-MM-yyyy HH:mm");
 };
 
-const TableUsers = [
+const TableUsers = (softDeleteUser) => [
+  {
+    title: "No",
+    key: "index",
+    render: (_, __, index) => index + 1,
+  },
   {
     title: "Name",
     dataIndex: "name",
@@ -39,7 +44,7 @@ const TableUsers = [
         <Tooltip title="Delete">
           <Popconfirm
             title="Are you sure to delete this user?"
-            onConfirm={""}
+            onConfirm={() => softDeleteUser(record.id)}
             okText="Yes"
             cancelText="Cancel"
           >

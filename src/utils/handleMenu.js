@@ -1,5 +1,5 @@
 const handleMenuClick = (navigate) => (e) => {
-  const path = e.item.props.path;
+  const path = e.item.props["path"];
   if (path) {
     navigate(path);
   } else {

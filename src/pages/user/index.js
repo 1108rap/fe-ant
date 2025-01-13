@@ -1,4 +1,4 @@
-import { Button, message, Space, Table } from "antd";
+import { Button, Dropdown, Flex, message, Space, Table } from "antd";
 import DashLayout from "../../layout/DashLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -18,10 +18,6 @@ const User = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const softDeleteUser = async (id) => {
     try {
       await axios.put(`http://127.0.0.1:5000/api/users/${id}/delete`);
@@ -33,17 +29,32 @@ const User = () => {
     }
   };
 
+  const handleDownloadTemplate = () => {
+    window.location.href = "http://127.0.0.1:5000/api/generatetemplate";
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const items = [{ label: "Template" }, { label: "Data" }];
+
   return (
     // <DashLayout>
     <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-      <Space size="small">
-        <Button type="primary" danger onClick={() => navigate(-1)}>
-          Back
+      <Flex justify="space-between">
+        <Space size="small">
+          <Button type="primary" danger onClick={() => navigate(-1)}>
+            Back
+          </Button>
+          <Button type="primary" onClick={() => navigate("/user/formuser")}>
+            Add User
+          </Button>
+        </Space>
+        <Button type="primary" onClick={handleDownloadTemplate}>
+          Download Template
         </Button>
-        <Button type="primary" onClick={() => navigate("/user/formuser")}>
-          Add User
-        </Button>
-      </Space>
+      </Flex>
       <Table
         columns={TableUsers(softDeleteUser)}
         dataSource={dataUser.map((data) => ({ ...data, key: data.id }))}

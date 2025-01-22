@@ -29,8 +29,21 @@ const User = () => {
     }
   };
 
-  const handleDownloadTemplate = () => {
-    window.location.href = "http://127.0.0.1:5000/api/generatetemplate";
+  const handleDownloadTemplate = async () => {
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/generatetemplate"
+      );
+
+      if (!response.ok) {
+        throw new Error("failed download");
+      }
+
+      window.location.href = "/user";
+      message.success("Template Successfully Downloaded!");
+    } catch (err) {
+      console.error("Failed download template users:", err);
+    }
   };
 
   useEffect(() => {
